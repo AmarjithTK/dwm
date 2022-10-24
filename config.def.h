@@ -1,9 +1,10 @@
 /* See LICENSE file for copyright and license details. */
+#include <X11/XF86keysym.h>
 
 /* appearance */
 
 static const unsigned int systraypinning = 1;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
-static const unsigned int systrayspacing = 2;   /* systray spacing */
+static const unsigned int systrayspacing = 4;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;
 static const int systrayonleft = 0;
@@ -52,6 +53,7 @@ static const Layout layouts[] = {
 
 /* key definitions */
 #define MODKEY Mod4Mask
+#define ALTKEY Mod1Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -65,10 +67,21 @@ static const Layout layouts[] = {
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 
+ static const char *volupcmd[] = { "/bin/bash", "-c", "amixer -D default sset Master Playback 5%+" };
+ static const char *volmaxcmd[] = { "/bin/bash", "-c", "amixer -D default sset Master Playback 100%" };
+ static const char *voldowncmd[] = { "/bin/bash", "-c", "amixer -D default sset Master Playback 5%-" };
+static const char *volmutecmd[] = { "/bin/bash", "-c", "amixer -D default sset Master Playback 0%" };
+static const char *kittycmd[] = {"/bin/bash","-c","tabbed alacritty --embed"};
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
+	 {0,                      XF86XK_AudioRaiseVolume,      spawn,          {.v = volupcmd } },
+	 {0,                      XF86XK_AudioLowerVolume,    spawn,          {.v = voldowncmd } },
+	 { MODKEY,           XK_Up,      spawn,          {.v = volmaxcmd } },
+	 {0,                      XF86XK_AudioMute,    spawn,          {.v = volmutecmd } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ ALTKEY,             XK_Return, spawn,          {.v = kittycmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -78,7 +91,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+	{ MODKEY|ShiftMask,             XK_x,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
