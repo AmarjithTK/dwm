@@ -8,17 +8,17 @@ static const unsigned int systrayspacing = 4;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;
 static const int systrayonleft = 0;
-static const unsigned int borderpx  = 6;        /* border pixel of windows */
+static const unsigned int borderpx  = 3;       /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Fira Code Medium:size=12" };
 static const char dmenufont[]       = "Fira Code Medium:size=12";
 static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
+static const char col_gray2[]       = "#425F57";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+static const char col_cyan[]        = "#749F82";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -38,6 +38,7 @@ const char *spcmd1[] = {"alacritty", "-t", "spranger", "--class", "spranger", "-
 const char *spcmd2[] = {"alacritty", "-t", "spmusic", "--class", "spmusic", "-e", "cmus", NULL };
 const char *spcmd3[] = {"alacritty", "-t", "spterminal","--config-file","/home/solan/.config/alacritty/salacritty.yml" ,"--class", "spterminal", NULL };
 
+const char *spcmd4[] = {"firefox", NULL };
 
 // const char *spcmd2[] = {"alacritty", "--class", "spmusic", "--config-file", "/home/solan/.config/alacritty/salacritty.yml","ranger", NULL };
 // const char *spcmd1[] = {"alacritty", "--class", "scmus", "--config-file", "/home/solan/.config/alacritty/salacritty.yml","cmus", NULL };
@@ -50,6 +51,8 @@ static Sp scratchpads[] = {
 	{"spranger",      spcmd1},
 	{"spmuisc",    spcmd2},
 	{"spterminal",   spcmd3},
+	{"spfirefox",   spcmd3},
+
 };
 
 
@@ -71,6 +74,7 @@ static const Rule rules[] = {
 	{ NULL,		  "spranger",		NULL,		SPTAG(0),		1,			 -1 },
 	{ NULL,		  "spmusic",		NULL,		SPTAG(1),		1,			 -1 },
 	{ NULL,		  "spterminal",	NULL,		SPTAG(2),		1,			 -1 },
+	{ NULL,		  "spfirefox",	NULL,		SPTAG(3),		1,			 -1 },
 };
 
 /* layout(s) */
@@ -132,6 +136,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,            			XK_a,  	   togglescratch,  {.ui = 0 } },
 	{ MODKEY|ShiftMask,            			XK_s,  	   togglescratch,  {.ui = 1 } },
 	{ MODKEY|ShiftMask,            			XK_d,  	   togglescratch,  {.ui = 2 } },
+	{ MODKEY|ShiftMask,            			XK_j,  	   togglescratch,  {.ui = 3 } },
 
 
 	// default keybinds
