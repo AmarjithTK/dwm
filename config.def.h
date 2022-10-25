@@ -25,17 +25,52 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 
-/* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+typedef struct {
+	const char *name;
+	const void *cmd;
+} Sp;
 
+
+/* ----------------------------- scratchpad definition -------------------------------- */
+
+
+const char *spcmd1[] = {"alacritty", "-t", "spranger", "--class", "spranger", "-e", "ranger", NULL };
+const char *spcmd2[] = {"alacritty", "-t", "spmusic", "--class", "spmusic", "-e", "cmus", NULL };
+const char *spcmd3[] = {"alacritty", "-t", "spterminal","--config-file","/home/solan/.config/alacritty/salacritty.yml" ,"--class", "spterminal", NULL };
+
+
+// const char *spcmd2[] = {"alacritty", "--class", "spmusic", "--config-file", "/home/solan/.config/alacritty/salacritty.yml","ranger", NULL };
+// const char *spcmd1[] = {"alacritty", "--class", "scmus", "--config-file", "/home/solan/.config/alacritty/salacritty.yml","cmus", NULL };
+// const char *spcmd3[] = {"alacritty", "--class", "sterm", "--config-file", "/home/solan/.config/alacritty/salacritty.yml", NULL };
+
+
+
+static Sp scratchpads[] = {
+	/* name          cmd  */
+	{"spranger",      spcmd1},
+	{"spmuisc",    spcmd2},
+	{"spterminal",   spcmd3},
+};
+
+
+/* ----------------------------- Tagging windows -------------------------------- */
+
+
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Gimp",	  NULL,			NULL,		0,				1,			 -1 },
+	{ "Firefox",  NULL,			NULL,		1 << 8,			0,			 -1 },
+
+//========== Scratchpad specific
+
+	{ NULL,		  "spranger",		NULL,		SPTAG(0),		1,			 -1 },
+	{ NULL,		  "spmusic",		NULL,		SPTAG(1),		1,			 -1 },
+	{ NULL,		  "spterminal",	NULL,		SPTAG(2),		1,			 -1 },
 };
 
 /* layout(s) */
@@ -63,22 +98,44 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
-/* commands */
+/* ----------------------------- commands list-------------------------------- */
+
+
+// default list
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 
+
+// user defined list
  static const char *volupcmd[] = { "/bin/bash", "-c", "amixer -D default sset Master Playback 5%+" };
  static const char *volmaxcmd[] = { "/bin/bash", "-c", "amixer -D default sset Master Playback 100%" };
  static const char *voldowncmd[] = { "/bin/bash", "-c", "amixer -D default sset Master Playback 5%-" };
 static const char *volmutecmd[] = { "/bin/bash", "-c", "amixer -D default sset Master Playback 0%" };
 static const char *kittycmd[] = {"/bin/bash","-c","tabbed alacritty --embed"};
 
+
+/* ----------------------------- keybindings -------------------------------- */
+
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
+
+	// volume control keybinds
+
 	 {0,                      XF86XK_AudioRaiseVolume,      spawn,          {.v = volupcmd } },
 	 {0,                      XF86XK_AudioLowerVolume,    spawn,          {.v = voldowncmd } },
 	 { MODKEY,           XK_Up,      spawn,          {.v = volmaxcmd } },
 	 {0,                      XF86XK_AudioMute,    spawn,          {.v = volmutecmd } },
+	
+        // scratchpad keybinds
+
+	{ MODKEY|ShiftMask,            			XK_a,  	   togglescratch,  {.ui = 0 } },
+	{ MODKEY|ShiftMask,            			XK_s,  	   togglescratch,  {.ui = 1 } },
+	{ MODKEY|ShiftMask,            			XK_d,  	   togglescratch,  {.ui = 2 } },
+
+
+	// default keybinds
+
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ ALTKEY,             XK_Return, spawn,          {.v = kittycmd } },
@@ -115,7 +172,8 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 };
 
-/* button definitions */
+/* ----------------------------- Button definitions -------------------------------- */
+
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
@@ -125,7 +183,7 @@ static const Button buttons[] = {
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
+	{ ClkClientWin,         MODKEY,         Button1,        resizemouse,    {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
