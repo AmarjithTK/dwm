@@ -44,14 +44,27 @@ const char *spcmd4[] = {"firefox", NULL };
 // const char *spcmd1[] = {"alacritty", "--class", "scmus", "--config-file", "/home/solan/.config/alacritty/salacritty.yml","cmus", NULL };
 // const char *spcmd3[] = {"alacritty", "--class", "sterm", "--config-file", "/home/solan/.config/alacritty/salacritty.yml", NULL };
 
+/*
 
+	Requirements to be met for this to work properly
+
+        slstatus - light status updater
+	ranger - terminal based file manager
+	cmus - terminal music player 
+	alacritty - spalacritty.yml file at /home/<user_name>/.config/alacritty/salacritty.yml
+	fira code font - get it from google fonts full package
+	amixer - for volume keys to work properly
+	tabbed - for adding tabs to alacritty .. get it from suckless tools
+
+
+*/
 
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spranger",      spcmd1},
 	{"spmuisc",    spcmd2},
 	{"spterminal",   spcmd3},
-	{"spfirefox",   spcmd3},
+	{"firefox",   spcmd3},
 
 };
 
@@ -74,7 +87,7 @@ static const Rule rules[] = {
 	{ NULL,		  "spranger",		NULL,		SPTAG(0),		1,			 -1 },
 	{ NULL,		  "spmusic",		NULL,		SPTAG(1),		1,			 -1 },
 	{ NULL,		  "spterminal",	NULL,		SPTAG(2),		1,			 -1 },
-	{ NULL,		  "spfirefox",	NULL,		SPTAG(3),		1,			 -1 },
+	{ NULL,		  "firefox",	NULL,		SPTAG(3),		1,			 -1 },
 };
 
 /* layout(s) */
@@ -111,7 +124,10 @@ static const char *termcmd[]  = { "alacritty", NULL };
 
 
 // user defined list
- static const char *volupcmd[] = { "/bin/bash", "-c", "amixer -D default sset Master Playback 5%+" };
+static const char *browsercmd[]  = { "chromium", NULL };
+ 
+
+static const char *volupcmd[] = { "/bin/bash", "-c", "amixer -D default sset Master Playback 5%+" };
  static const char *volmaxcmd[] = { "/bin/bash", "-c", "amixer -D default sset Master Playback 100%" };
  static const char *voldowncmd[] = { "/bin/bash", "-c", "amixer -D default sset Master Playback 5%-" };
 static const char *volmutecmd[] = { "/bin/bash", "-c", "amixer -D default sset Master Playback 0%" };
@@ -137,6 +153,9 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,            			XK_s,  	   togglescratch,  {.ui = 1 } },
 	{ MODKEY|ShiftMask,            			XK_d,  	   togglescratch,  {.ui = 2 } },
 	{ MODKEY|ShiftMask,            			XK_j,  	   togglescratch,  {.ui = 3 } },
+
+    	// launchers
+	{ALTKEY,             XK_f, spawn,          {.v = browsercmd } },
 
 
 	// default keybinds
