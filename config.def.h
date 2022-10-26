@@ -3,42 +3,48 @@
 
 /* appearance */
 
-static const unsigned int systraypinning = 1;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
-static const unsigned int systrayspacing = 4;   /* systray spacing */
-static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const int showsystray        = 1;
+static const unsigned int systraypinning = 1;	/* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const unsigned int systrayspacing = 4;	/* systray spacing */
+static const int systraypinningfailfirst = 1;	/* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor */
+static const int showsystray = 1;
 static const int systrayonleft = 0;
-static const unsigned int borderpx  = 3;       /* border pixel of windows */
-static const unsigned int snap      = 32;       /* snap pixel */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Fira Code Medium:size=12" };
-static const char dmenufont[]       = "Fira Code Medium:size=12";
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#425F57";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#749F82";
-static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+static const unsigned int borderpx = 3;	/* border pixel of windows */
+static const unsigned int snap = 32;	/* snap pixel */
+static const int showbar = 1;	/* 0 means no bar */
+static const int topbar = 1;	/* 0 means bottom bar */
+static const char *fonts[] = { "Fira Code Medium:size=12" };
+
+static const char dmenufont[] = "Fira Code Medium:size=12";
+static const char col_gray1[] = "#222222";
+static const char col_gray2[] = "#425F57";
+static const char col_gray3[] = "#bbbbbb";
+static const char col_gray4[] = "#eeeeee";
+static const char col_cyan[] = "#749F82";
+static const char *colors[][3] = {
+  /*               fg         bg         border   */
+  [SchemeNorm] = {col_gray3, col_gray1, col_gray2},
+  [SchemeSel] = {col_gray4, col_cyan, col_cyan},
 };
 
-typedef struct {
-	const char *name;
-	const void *cmd;
+typedef struct
+{
+  const char *name;
+  const void *cmd;
 } Sp;
 
 
 /* ----------------------------- scratchpad definition -------------------------------- */
 
 
-const char *spcmd1[] = {"alacritty", "-t", "spranger", "--class", "spranger", "-e", "ranger", NULL };
-const char *spcmd2[] = {"alacritty", "-t", "spmusic", "--class", "spmusic", "-e", "cmus", NULL };
-const char *spcmd3[] = {"alacritty", "-t", "spterminal","--config-file","/home/solan/.config/alacritty/salacritty.yml" ,"--class", "spterminal", NULL };
+const char *spcmd1[] =
+  { "alacritty", "-t", "spranger", "--class", "spranger", "-e", "ranger",
+NULL };
+const char *spcmd2[] =
+  { "alacritty", "-t", "spmusic", "--class", "spmusic", "-e", "cmus", NULL };
+const char *spcmd3[] =
+  { "alacritty", "-t", "spterminal", "--config-file",
+"/home/solan/.config/alacritty/salacritty.yml", "--class", "spterminal", NULL };
 
-const char *spcmd4[] = {"firefox", NULL };
 
 // const char *spcmd2[] = {"alacritty", "--class", "spmusic", "--config-file", "/home/solan/.config/alacritty/salacritty.yml","ranger", NULL };
 // const char *spcmd1[] = {"alacritty", "--class", "scmus", "--config-file", "/home/solan/.config/alacritty/salacritty.yml","cmus", NULL };
@@ -46,25 +52,24 @@ const char *spcmd4[] = {"firefox", NULL };
 
 /*
 
-	Requirements to be met for this to work properly
+   Requirements to be met for this to work properly
 
-        slstatus - light status updater
-	ranger - terminal based file manager
-	cmus - terminal music player 
-	alacritty - spalacritty.yml file at /home/<user_name>/.config/alacritty/salacritty.yml
-	fira code font - get it from google fonts full package
-	amixer - for volume keys to work properly
-	tabbed - for adding tabs to alacritty .. get it from suckless tools
+   slstatus - light status updater
+   ranger - terminal based file manager
+   cmus - terminal music player 
+   alacritty - spalacritty.yml file at /home/<user_name>/.config/alacritty/salacritty.yml
+   fira code font - get it from google fonts full package
+   amixer - for volume keys to work properly
+   tabbed - for adding tabs to alacritty .. get it from suckless tools
 
 
-*/
+ */
 
 static Sp scratchpads[] = {
-	/* name          cmd  */
-	{"spranger",      spcmd1},
-	{"spmuisc",    spcmd2},
-	{"spterminal",   spcmd3},
-	{"firefox",   spcmd3},
+  /* name          cmd  */
+  {"spranger", spcmd1},
+  {"spmuisc", spcmd2},
+  {"spterminal", spcmd3},
 
 };
 
@@ -73,44 +78,45 @@ static Sp scratchpads[] = {
 
 
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+
 static const Rule rules[] = {
-	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title
-	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",	  NULL,			NULL,		0,				1,			 -1 },
-	{ "Firefox",  NULL,			NULL,		1 << 8,			0,			 -1 },
+  /* xprop(1):
+   *      WM_CLASS(STRING) = instance, class
+   *      WM_NAME(STRING) = title
+   */
+  /* class      instance    title       tags mask     isfloating   monitor */
+  {"Gimp", NULL, NULL, 0, 1, -1},
+  {"kdeconnect-app", NULL, NULL, 0, 1, -1},
+  {"galculator", NULL, NULL, 0, 1, -1},
+  {"mpv", NULL, NULL, 0, 1, -1},
+  {"Firefox", NULL, NULL, 1 << 8, 0, -1},	//========== Scratchpad specific
 
-//========== Scratchpad specific
-
-	{ NULL,		  "spranger",		NULL,		SPTAG(0),		1,			 -1 },
-	{ NULL,		  "spmusic",		NULL,		SPTAG(1),		1,			 -1 },
-	{ NULL,		  "spterminal",	NULL,		SPTAG(2),		1,			 -1 },
-	{ NULL,		  "firefox",	NULL,		SPTAG(3),		1,			 -1 },
+  {NULL, "spranger", NULL, SPTAG (0), 1, -1},
+  {NULL, "spmusic", NULL, SPTAG (1), 1, -1},
+  {NULL, "spterminal", NULL, SPTAG (2), 1, -1},
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
-static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
-static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
+static const float mfact = 0.55;	/* factor of master area size [0.05..0.95] */
+static const int nmaster = 1;	/* number of clients in master area */
+static const int resizehints = 1;	/* 1 means respect size hints in tiled resizals */
+static const int lockfullscreen = 1;	/* 1 will force focus on the fullscreen window */
 
 static const Layout layouts[] = {
-	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
+  /* symbol     arrange function */
+  {"[]=", tile},		/* first entry is default */
+  {"><>", NULL},		/* no layout function means floating behavior */
+  {"[M]", monocle},
 };
 
 /* key definitions */
 #define MODKEY Mod4Mask
 #define ALTKEY Mod1Mask
 #define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
+{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
@@ -119,81 +125,89 @@ static const Layout layouts[] = {
 
 
 // default list
-static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *dmenucmd[] =
+  { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb",
+col_cyan, "-sf", col_gray4, NULL };
+static const char *termcmd[] = { "alacritty", NULL };
 
 
 // user defined list
-static const char *browsercmd[]  = { "chromium", NULL };
- 
+static const char *browsercmd[] = { "chromium", NULL };
 
-static const char *volupcmd[] = { "/bin/bash", "-c", "amixer -D default sset Master Playback 5%+" };
- static const char *volmaxcmd[] = { "/bin/bash", "-c", "amixer -D default sset Master Playback 100%" };
- static const char *voldowncmd[] = { "/bin/bash", "-c", "amixer -D default sset Master Playback 5%-" };
-static const char *volmutecmd[] = { "/bin/bash", "-c", "amixer -D default sset Master Playback 0%" };
-static const char *kittycmd[] = {"/bin/bash","-c","tabbed alacritty --embed"};
+static const char *powercmd[] =
+  { "/bin/bash", "-c", "/home/$USER/.local/bin/dpowermenu" };
+
+static const char *volupcmd[] =
+  { "/bin/bash", "-c", "amixer -D default sset Master Playback 5%+" };
+static const char *volmaxcmd[] =
+  { "/bin/bash", "-c", "amixer -D default sset Master Playback 100%" };
+static const char *voldowncmd[] =
+  { "/bin/bash", "-c", "amixer -D default sset Master Playback 5%-" };
+static const char *volmutecmd[] =
+  { "/bin/bash", "-c", "amixer -D default sset Master Playback 0%" };
+static const char *kittycmd[] =
+  { "/bin/bash", "-c", "tabbed alacritty --embed" };
 
 
 /* ----------------------------- keybindings -------------------------------- */
 
 
 static const Key keys[] = {
-	/* modifier                     key        function        argument */
+  /* modifier                     key        function        argument */
 
-	// volume control keybinds
+  // volume control keybinds
 
-	 {0,                      XF86XK_AudioRaiseVolume,      spawn,          {.v = volupcmd } },
-	 {0,                      XF86XK_AudioLowerVolume,    spawn,          {.v = voldowncmd } },
-	 { MODKEY,           XK_Up,      spawn,          {.v = volmaxcmd } },
-	 {0,                      XF86XK_AudioMute,    spawn,          {.v = volmutecmd } },
-	
-        // scratchpad keybinds
+  {0, XF86XK_AudioRaiseVolume, spawn, {.v = volupcmd}},
+  {0, XF86XK_AudioLowerVolume, spawn, {.v = voldowncmd}},
+  {MODKEY, XK_Up, spawn, {.v = volmaxcmd}},
+  {0, XF86XK_AudioMute, spawn, {.v = volmutecmd}},
 
-	{ MODKEY|ShiftMask,            			XK_a,  	   togglescratch,  {.ui = 0 } },
-	{ MODKEY|ShiftMask,            			XK_s,  	   togglescratch,  {.ui = 1 } },
-	{ MODKEY|ShiftMask,            			XK_d,  	   togglescratch,  {.ui = 2 } },
-	{ MODKEY|ShiftMask,            			XK_j,  	   togglescratch,  {.ui = 3 } },
+  // scratchpad keybinds
 
-    	// launchers
-	{ALTKEY,             XK_f, spawn,          {.v = browsercmd } },
+  {MODKEY | ShiftMask, XK_a, togglescratch, {.ui = 0}},
+  {MODKEY | ShiftMask, XK_s, togglescratch, {.ui = 1}},
+  {MODKEY | ShiftMask, XK_d, togglescratch, {.ui = 2}},
+  {MODKEY | ShiftMask, XK_j, togglescratch, {.ui = 3}},
 
+  // launchers
+  {ALTKEY, XK_f, spawn, {.v = browsercmd}},
 
-	// default keybinds
+  {MODKEY | ShiftMask, XK_e, spawn, {.v = powercmd}},
 
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ ALTKEY,             XK_Return, spawn,          {.v = kittycmd } },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY,                       XK_Return, zoom,           {0} },
-	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_x,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_space,  setlayout,      {0} },
-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	TAGKEYS(                        XK_1,                      0)
-	TAGKEYS(                        XK_2,                      1)
-	TAGKEYS(                        XK_3,                      2)
-	TAGKEYS(                        XK_4,                      3)
-	TAGKEYS(                        XK_5,                      4)
-	TAGKEYS(                        XK_6,                      5)
-	TAGKEYS(                        XK_7,                      6)
-	TAGKEYS(                        XK_8,                      7)
-	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+  // default keybinds
+
+  {MODKEY, XK_p, spawn, {.v = dmenucmd}},
+  {MODKEY | ShiftMask, XK_Return, spawn, {.v = termcmd}},
+  {ALTKEY, XK_Return, spawn, {.v = kittycmd}},
+  {MODKEY, XK_b, togglebar, {0}},
+  {MODKEY, XK_j, focusstack, {.i = +1}},
+  {MODKEY, XK_k, focusstack, {.i = -1}},
+  {MODKEY, XK_i, incnmaster, {.i = +1}},
+  {MODKEY, XK_d, incnmaster, {.i = -1}},
+  {MODKEY, XK_h, setmfact, {.f = -0.05}},
+  {MODKEY, XK_l, setmfact, {.f = +0.05}},
+  {MODKEY, XK_Return, zoom, {0}},
+  {MODKEY, XK_Tab, view, {0}},
+  {MODKEY | ShiftMask, XK_x, killclient, {0}},
+  {MODKEY, XK_t, setlayout, {.v = &layouts[0]}},
+  {MODKEY, XK_f, setlayout, {.v = &layouts[1]}},
+  {MODKEY, XK_m, setlayout, {.v = &layouts[2]}},
+  {MODKEY, XK_space, setlayout, {0}},
+  {MODKEY | ShiftMask, XK_space, togglefloating, {0}},
+  {MODKEY, XK_0, view, {.ui = ~0}},
+  {MODKEY | ShiftMask, XK_0, tag, {.ui = ~0}},
+  {MODKEY, XK_comma, focusmon, {.i = -1}},
+  {MODKEY, XK_period, focusmon, {.i = +1}},
+  {MODKEY | ShiftMask, XK_comma, tagmon, {.i = -1}},
+  {MODKEY | ShiftMask, XK_period, tagmon, {.i = +1}},
+  TAGKEYS (XK_1, 0)
+	  TAGKEYS (XK_2, 1)
+	  TAGKEYS (XK_3, 2)
+	  TAGKEYS (XK_4, 3)
+	  TAGKEYS (XK_5, 4)
+	  TAGKEYS (XK_6, 5)
+	  TAGKEYS (XK_7, 6)
+	  TAGKEYS (XK_8, 7) TAGKEYS (XK_9, 8) {MODKEY | ShiftMask, XK_q, quit, {0}},
 };
 
 /* ----------------------------- Button definitions -------------------------------- */
@@ -201,16 +215,15 @@ static const Key keys[] = {
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
-	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
-	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
-	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
-	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button1,        resizemouse,    {0} },
-	{ ClkTagBar,            0,              Button1,        view,           {0} },
-	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
-	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
-	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	{ClkTagBar, MODKEY, Button1, tag, {0}},
+	{ClkTagBar, MODKEY, Button3, toggletag, {0}},
+	{ClkWinTitle, 0, Button2, zoom, {0}},
+	{ClkStatusText, 0, Button2, spawn, {.v = termcmd}},
+	{ClkClientWin, MODKEY, Button1, movemouse, {0}},
+	{ClkClientWin, MODKEY, Button2, togglefloating, {0}},
+	{ClkClientWin, MODKEY, Button1, resizemouse, {0}},
+	{ClkTagBar, 0, Button1, view, {0}},
+	{ClkTagBar, 0, Button3, toggleview, {0}},
+	{ClkTagBar, MODKEY, Button1, tag, {0}},
+	{ClkTagBar, MODKEY, Button3, toggletag, {0}},
 };
-
