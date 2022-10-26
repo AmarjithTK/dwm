@@ -131,11 +131,16 @@ col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[] = { "alacritty", NULL };
 
 
-// user defined list
-static const char *browsercmd[] = { "chromium", NULL };
 
-static const char *powercmd[] =
-  { "/bin/bash", "-c", "/home/$USER/.local/bin/dpowermenu" };
+//static const char *powercmd[] = { "/bin/bash", "-c","dmenu-powermenu" };
+//static const char *configcmd[] = { "/bin/bash", "-c","dmenu-config-editor" };
+
+
+// user defined list
+//static const char *browsercmd[] = { "chromium", NULL };
+
+//static const char *powercmd[] =
+//  { "/bin/bash", "-c", "/home/$USER/.local/bin/dpowermenu" };
 
 static const char *volupcmd[] =
   { "/bin/bash", "-c", "amixer -D default sset Master Playback 5%+" };
@@ -145,8 +150,8 @@ static const char *voldowncmd[] =
   { "/bin/bash", "-c", "amixer -D default sset Master Playback 5%-" };
 static const char *volmutecmd[] =
   { "/bin/bash", "-c", "amixer -D default sset Master Playback 0%" };
-static const char *kittycmd[] =
-  { "/bin/bash", "-c", "tabbed alacritty --embed" };
+//static const char *kittycmd[] =
+//  { "/bin/bash", "-c", "tabbed alacritty --embed" };
 
 
 /* ----------------------------- keybindings -------------------------------- */
@@ -170,15 +175,16 @@ static const Key keys[] = {
   {MODKEY | ShiftMask, XK_j, togglescratch, {.ui = 3}},
 
   // launchers
-  {ALTKEY, XK_f, spawn, {.v = browsercmd}},
+  //{ALTKEY, XK_f, spawn, {.v = browsercmd}},
 
-  {MODKEY | ShiftMask, XK_e, spawn, {.v = powercmd}},
+  //{MODKEY | ShiftMask, XK_e, spawn, {.v = powercmd}},
+  //{MODKEY | ShiftMask, XK_o, spawn, {.v = configcmd}},
 
   // default keybinds
 
   {MODKEY, XK_p, spawn, {.v = dmenucmd}},
-  {MODKEY | ShiftMask, XK_Return, spawn, {.v = termcmd}},
-  {ALTKEY, XK_Return, spawn, {.v = kittycmd}},
+  {ALTKEY|ShiftMask, XK_Return, spawn, {.v = termcmd}},
+  //{ALTKEY, XK_Return, spawn, {.v = kittycmd}},
   {MODKEY, XK_b, togglebar, {0}},
   {MODKEY, XK_j, focusstack, {.i = +1}},
   {MODKEY, XK_k, focusstack, {.i = -1}},
