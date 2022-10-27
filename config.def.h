@@ -34,17 +34,9 @@ typedef struct {
 } Sp;
 
 
-const char *spcmd1[] ={ "alacritty", "-t", "spranger", "--class", "spranger", "-e", "ranger",NULL };
-const char *spcmd2[] ={ "alacritty", "-t", "spmusic", "--class", "spmusic", "-e", "cmus", NULL };
-const char *spcmd3[] ={ "alacritty", "-t", "spterminal", "--config-file","/home/solan/.config/alacritty/salacritty.yml", "--class", "spterminal", NULL };
 
 
-static Sp scratchpads[] = {
-	/* name          cmd  */
-	{"spranger", spcmd1},
-	{"spmusic", spcmd2},
-	{"spterminal", spcmd3},
-};
+
 
 static const char *const autostart[] = {
 	"sh","-c","~/dwm/autostart.sh", NULL,
@@ -65,9 +57,7 @@ static const Rule rules[] = {
 	{"Galculator", NULL, NULL, 0, 1, -1},
 	{"Thunar", NULL, NULL, 0, 1, -1},
 	{"mpv", NULL, NULL, 0, 1, -1},
-	{ NULL,		  "spranger",		NULL,		SPTAG(0),		1,			 -1 },
-	{ NULL,		  "spmusic",		NULL,		SPTAG(1),		1,			 -1 },
-	{ NULL,		  "spterminal",	NULL,		SPTAG(2),		1,			 -1 },
+	
 };
 
 /* layout(s) */
@@ -138,9 +128,6 @@ static const Key keys[] = {
 
 
     // scratch pad keyword
-	{ MODKEY|ShiftMask,            			XK_a,  	   togglescratch,  {.ui = 0 } },
-	{ MODKEY|ShiftMask,            			XK_s,  	   togglescratch,  {.ui = 1 } },
-	{ MODKEY|ShiftMask,            			XK_d,  	   togglescratch,  {.ui = 2 } },
 
 
     // volume control keybinds
@@ -174,7 +161,7 @@ static const Button buttons[] = {
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button1,        resizemouse,    {0} },
+	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },

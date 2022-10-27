@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sxhkd &
-redshifter 2000 .7 &
+redshifter 200 .9 &
 nitrogen --restore &
 flameshot &
 nm-applet &
