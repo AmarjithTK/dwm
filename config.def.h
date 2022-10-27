@@ -6,7 +6,7 @@
 /* -------------------------- Endeavour dwm 2 ------------------------------- */
 
 
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -44,12 +44,16 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",	  NULL,			NULL,		0,				1,			 -1 },
-	{ "Firefox",  NULL,			NULL,		1 << 8,			0,			 -1 },
-	{"kdeconnect.app", NULL, NULL, 0, 1, -1},
-	{"Galculator", NULL, NULL, 0, 1, -1},
-	{"Thunar", NULL, NULL, 0, 1, -1},
-	{"mpv", NULL, NULL, 0, 1, -1},
+
+	{ "kdeconnect.app",     NULL,       NULL,       0,            1,           -1,        50,50,500,500,        5 },
+	{ "Thunar",     NULL,       NULL,       0,            1,           -1,        50,50,500,500,        5 },
+	{ "Galculator",     NULL,       NULL,       0,            1,           -1,        50,50,100,300,        5 },
+	{ "Gimp",     NULL,       NULL,       0,            1,           -1,        50,50,500,500,        5 },
+	
+
+	{ "spranger",     NULL,       NULL,       0,            1,           -1,        50,50,500,500,        5 },
+	{ "spterm",     NULL,       NULL,       0,            1,           -1,        50,50,500,500,        5 },
+	{ "spmusic",     NULL,       NULL,       0,            1,           -1,        50,50,500,500,        5 },
 	
 };
 
