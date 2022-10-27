@@ -16,8 +16,8 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;     /* 0 means no bar */
 static const int topbar             = 1;     /* 0 means bottom bar */
-static const char *fonts[] = { "Fira Code Medium:size=12" };
-static const char dmenufont[] = "Fira Code Medium:size=12";
+static const char *fonts[] = { "Fira Code Medium:size=13" };
+static const char dmenufont[] = "Fira Code Medium:size=13";
 static const char col_gray1[] = "#222222";
 static const char col_gray2[] = "#425F57";
 static const char col_gray3[] = "#bbbbbb";
@@ -28,14 +28,6 @@ static const char *colors[][3] = {
 	[SchemeNorm] = {col_gray3, col_gray1, col_gray2},
 	[SchemeSel] = {col_gray4, col_cyan, col_cyan},
 };
-
-typedef struct {
-	const char *name;
-	const void *cmd;
-} Sp;
-
-
-
 
 
 
@@ -114,7 +106,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+	{ MODKEY|ShiftMask,             XK_x,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -133,7 +125,13 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
 
     // scratch pad keyword
-
+    { MODKEY,                       XK_s, scratchpad_show, {.i = 1} },
+    { MODKEY,                       XK_y, scratchpad_show, {.i = 2} },
+    { MODKEY,                       XK_u, scratchpad_show, {.i = 3} },
+    { MODKEY|ShiftMask,                       XK_s, scratchpad_hide, {.i = 1} },
+    { MODKEY|ShiftMask,                       XK_y, scratchpad_hide, {.i = 2} },
+    { MODKEY|ShiftMask,                       XK_u, scratchpad_hide, {.i = 3} },
+	{ MODKEY|ShiftMask,             XK_r,      scratchpad_remove,           {0} },
 
     // volume control keybinds
 
