@@ -45,15 +45,16 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 
-	{ "kdeconnect.app",     NULL,       NULL,       0,            1,           -1,        50,50,500,500,        5 },
-	{ "Thunar",     NULL,       NULL,       0,            1,           -1,        50,50,500,500,        5 },
-	{ "Galculator",     NULL,       NULL,       0,            1,           -1,        50,50,100,300,        5 },
+	{ "kdeconnect.app",     NULL,       NULL,       0,            1,           -1,        50,50,800,500,        5 },
+	{ "Thunar",     NULL,       NULL,       0,            1,           -1,        50,50,800,500,        5 },
+	{ "Galculator",     NULL,       NULL,       0,            1,           -1,        50,50,100,100,        5 },
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1,        50,50,500,500,        5 },
+	{ "Rhythmbox",     NULL,       NULL,       0,            1,           -1,        50,50,800,500,        5 },
 	
 
-	{ "spranger",     NULL,       NULL,       0,            1,           -1,        50,50,500,500,        5 },
-	{ "spterm",     NULL,       NULL,       0,            1,           -1,        50,50,500,500,        5 },
-	{ "spmusic",     NULL,       NULL,       0,            1,           -1,        50,50,500,500,        5 },
+	{ "spranger",     NULL,       NULL,       0,            1,           -1,        50,50,800,500,        5 },
+	{ "spterm",     NULL,       NULL,       0,            1,           -1,        50,50,800,500,        5 },
+	{ "spmusic",     NULL,       NULL,       0,            1,           -1,        50,50,800,500,        5 },
 	
 };
 
