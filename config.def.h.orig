@@ -6,8 +6,8 @@
 /* -------------------------- Endeavour dwm 2 ------------------------------- */
 
 
-static const unsigned int borderpx  = 3;        /* border pixel of windows */
-static const unsigned int gappx     = 9;        /* gaps between windows */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
@@ -23,11 +23,10 @@ static const char col_gray2[] = "#425F57";
 static const char col_gray3[] = "#bbbbbb";
 static const char col_gray4[] = "#eeeeee";
 static const char col_cyan[] = "#749F82";
-static const char col_window[] = "#FAD6A5";
 static const char *colors[][3] = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = {col_gray3, col_gray1, col_gray2},
-	[SchemeSel] = {col_gray4, col_cyan, col_window},
+	[SchemeSel] = {col_gray4, col_cyan, col_cyan},
 };
 
 
@@ -45,17 +44,12 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-
-	{ "kdeconnect.app",     NULL,       NULL,       0,            1,           -1,        50,50,800,500,        5 },
-	{ "Thunar",     NULL,       NULL,       0,            1,           -1,        50,50,800,500,        5 },
-	{ "Galculator",     NULL,       NULL,       0,            1,           -1,        50,50,100,100,        5 },
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1,        50,50,500,500,        5 },
-	{ "Rhythmbox",     NULL,       NULL,       0,            1,           -1,        50,50,800,500,        5 },
-	
-
-	{ "spranger",     NULL,       NULL,       0,            1,           -1,        50,50,800,500,        5 },
-	{ "spterm",     NULL,       NULL,       0,            1,           -1,        50,50,800,500,        5 },
-	{ "spmusic",     NULL,       NULL,       0,            1,           -1,        50,50,800,500,        5 },
+	{ "Gimp",	  NULL,			NULL,		0,				1,			 -1 },
+	{ "Firefox",  NULL,			NULL,		1 << 8,			0,			 -1 },
+	{"kdeconnect.app", NULL, NULL, 0, 1, -1},
+	{"Galculator", NULL, NULL, 0, 1, -1},
+	{"Thunar", NULL, NULL, 0, 1, -1},
+	{"mpv", NULL, NULL, 0, 1, -1},
 	
 };
 
