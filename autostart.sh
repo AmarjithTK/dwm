@@ -1,7 +1,9 @@
 #!/bin/bash
 
+blueman-applet &
+shutdown "2:00" &
 sxhkd &
-redshifter 2500 .9 &
+redshifter 3000 .9 &
 nitrogen --restore &
 flameshot &
 nm-applet &
