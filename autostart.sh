@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 blueman-applet &
@@ -10,3 +11,5 @@ nm-applet &
 volctl &
 slstatus &
 kdeconnect-cli -l&
+feh --recursive --bg-fill --randomize ~/.wallpapers &
+qbittorrent &
